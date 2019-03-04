@@ -6,7 +6,7 @@ import subprocess
 import threading
 from random import randint
 from time import sleep
-
+from numpy import std
 import matplotlib.animation as animation
 import numpy as np
 from matplotlib.figure import Figure
@@ -118,18 +118,27 @@ class RealtimePlotter(object):
         while 1:
             t_flag = detect(s)
             if t_flag == 1:
+                v = std(s)
+                if v < 400:
+                    self.ui.set_p2()
+                elif v < 450:
+                    self.ui.set_p3()
+                elif v < 500:
+                    self.ui.set_p4()
+                elif v < 550:
+                    self.ui.set_p5()
+                elif v < 600:
+                    self.ui.set_p6()
+                elif v < 650:
+                    self.ui.set_p7()
+                else:
+                    self.ui.set_p8()
                 if t_flag != self.d_flag:
-                    self.ui.safe_label.setPalette(self.ui.p2)
-                    self.ui.warning_label.setPalette(self.ui.p2)
-                    self.ui.danger_label.setPalette(self.ui.p0)
-                    self.ui.msg_text.append(self.get_time() + "<font color = 'red'>--> Warning! Someone invaded!!")
+                    self.ui.msg_text.append(self.get_time() + "<font color = 'red'>--> Warning! Someone coming!!")
                     self.ui.auto_scroll()
                 segments.append(s[-1])
             else:
                 if t_flag != self.d_flag:
-                    self.ui.safe_label.setPalette(self.ui.p1)
-                    self.ui.warning_label.setPalette(self.ui.p0)
-                    self.ui.danger_label.setPalette(self.ui.p0)
                     f = get_features(segments)
                     f = np.reshape(f, (1, 5))
                     f = min_max_scaler.transform(f)
@@ -137,11 +146,12 @@ class RealtimePlotter(object):
                     if res < 0:
                         self.ui.msg_text.append(
                             self.get_time() + "<font color = 'black'>--> Security! Legal person passed!!")
+                        self.ui.set_p1()
                     else:
                         self.ui.msg_text.append(
                             self.get_time() + "<font color = 'red'>--> Dangerous! Someone invaded!!")
+                        self.ui.set_p9()
                     self.ui.auto_scroll()
-                self.ui.safe_label.setPalette(self.ui.p1)
             self.d_flag = t_flag
             sleep(0.01)
 
@@ -153,10 +163,8 @@ class RealtimePlotter(object):
             t_flag = detect(s)
             if t_flag == 1:
                 if t_flag != self.d_flag:
-                    self.ui.safe_label.setPalette(self.ui.p2)
-                    self.ui.warning_label.setPalette(self.ui.p2)
-                    self.ui.danger_label.setPalette(self.ui.p0)
-                    self.ui.msg_text.append(self.get_time() + "<font color = 'red'>--> START!!")
+                    self.ui.set_p5()
+                    self.ui.msg_text.append(self.get_time() + "<font color = 'red'>--> Sample start!!")
                     self.ui.auto_scroll()
                     pin = pin % 64
                     segments.append([s[pin]])
@@ -165,12 +173,9 @@ class RealtimePlotter(object):
                     segments[-1].append(s[pin])
             else:
                 if t_flag != self.d_flag:
-                    self.ui.safe_label.setPalette(self.ui.p1)
-                    self.ui.warning_label.setPalette(self.ui.p0)
-                    self.ui.danger_label.setPalette(self.ui.p0)
-                    self.ui.msg_text.append(self.get_time() + "<font color = 'black'>--> END!!")
+                    self.ui.set_p1()
+                    self.ui.msg_text.append(self.get_time() + "<font color = 'black'>--> Sample end!!")
                     self.ui.auto_scroll()
-                self.ui.safe_label.setPalette(self.ui.p1)
             self.d_flag = t_flag
             sleep(0.01)
 

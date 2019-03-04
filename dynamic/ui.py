@@ -4,8 +4,8 @@ import os
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QTextCursor, QPalette
-from PyQt5.QtWidgets import  QSizePolicy
+from PyQt5.QtGui import QTextCursor, QPalette, QColor
+from PyQt5.QtWidgets import QSizePolicy
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from dynamic.RealtimePlotter import RealtimePlotter, segments
 
@@ -75,20 +75,34 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.quit_button.setFont(font_15)
 
         self.p0 = QPalette()
-        self.p0.setColor(QPalette.WindowText, Qt.black)
         self.p0.setColor(QPalette.Background, Qt.white)
 
         self.p1 = QPalette()
-        self.p1.setColor(QPalette.WindowText, Qt.black)
-        self.p1.setColor(QPalette.Background, Qt.green)
+        self.p1.setColor(QPalette.Background, QColor(0x76EE00))
 
         self.p2 = QPalette()
-        self.p2.setColor(QPalette.WindowText, Qt.black)
-        self.p2.setColor(QPalette.Background, Qt.yellow)
+        self.p2.setColor(QPalette.Background, QColor(0x99ff00))
 
         self.p3 = QPalette()
-        self.p3.setColor(QPalette.WindowText, Qt.black)
-        self.p3.setColor(QPalette.Background, Qt.red)
+        self.p3.setColor(QPalette.Background, QColor(0xccff00))
+
+        self.p4 = QPalette()
+        self.p4.setColor(QPalette.Background, QColor(0xffff00))
+
+        self.p5 = QPalette()
+        self.p5.setColor(QPalette.Background, QColor(0xEEEE00))
+
+        self.p6 = QPalette()
+        self.p6.setColor(QPalette.Background, QColor(0xFFB90F))
+
+        self.p7 = QPalette()
+        self.p7.setColor(QPalette.Background, QColor(0xFF8C00))
+
+        self.p8 = QPalette()
+        self.p8.setColor(QPalette.Background, QColor(0xFF4500))
+
+        self.p9 = QPalette()
+        self.p9.setColor(QPalette.Background, QColor(0xCD0000))
 
         self.safe_label1 = QtWidgets.QLabel()
         self.safe_label1.setAlignment(Qt.AlignCenter)
@@ -190,7 +204,8 @@ class UiMainWindow(QtWidgets.QMainWindow):
         if self.plotter.start_flag is False:
             return
         os.system("sudo kill -s 9 `ps -ef|grep '../netlink/log_to_file'|grep -v sudo|grep -v grep|awk '{print $2}'`")
-        self.msg_text.append(self.plotter.get_time() + '--> Stop showing!')
+        self.msg_text.append(
+            "<font color = 'black'>" + self.plotter.get_time() + "<font color = 'red'>--> Stop showing!")
         self.auto_scroll()
         self.plotter.pause()
         self.plotter.start_flag = False
@@ -200,6 +215,116 @@ class UiMainWindow(QtWidgets.QMainWindow):
 
     def auto_scroll(self):
         self.msg_text.moveCursor(QTextCursor.End)
+
+    def set_p0(self):
+        self.safe_label1.setPalette(self.p0)
+        self.safe_label2.setPalette(self.p0)
+        self.safe_label3.setPalette(self.p0)
+        self.warning_label1.setPalette(self.p0)
+        self.warning_label2.setPalette(self.p0)
+        self.warning_label3.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+
+    def set_p1(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p0)
+        self.safe_label3.setPalette(self.p0)
+        self.warning_label1.setPalette(self.p0)
+        self.warning_label2.setPalette(self.p0)
+        self.warning_label3.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+
+    def set_p2(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p0)
+        self.warning_label1.setPalette(self.p0)
+        self.warning_label2.setPalette(self.p0)
+        self.warning_label3.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+
+    def set_p3(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p3)
+        self.warning_label1.setPalette(self.p0)
+        self.warning_label2.setPalette(self.p0)
+        self.warning_label3.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+
+    def set_p4(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p3)
+        self.warning_label1.setPalette(self.p4)
+        self.warning_label2.setPalette(self.p0)
+        self.warning_label3.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+
+    def set_p5(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p3)
+        self.warning_label1.setPalette(self.p4)
+        self.warning_label2.setPalette(self.p5)
+        self.warning_label3.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+
+    def set_p6(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p3)
+        self.warning_label1.setPalette(self.p4)
+        self.warning_label2.setPalette(self.p5)
+        self.warning_label3.setPalette(self.p6)
+        self.danger_label1.setPalette(self.p0)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label1.setPalette(self.p0)
+
+    def set_p7(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p3)
+        self.warning_label1.setPalette(self.p4)
+        self.warning_label2.setPalette(self.p5)
+        self.warning_label3.setPalette(self.p6)
+        self.danger_label1.setPalette(self.p7)
+        self.danger_label2.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+
+    def set_p8(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p3)
+        self.warning_label1.setPalette(self.p4)
+        self.warning_label2.setPalette(self.p5)
+        self.warning_label3.setPalette(self.p6)
+        self.danger_label1.setPalette(self.p7)
+        self.danger_label2.setPalette(self.p8)
+        self.danger_label3.setPalette(self.p0)
+
+    def set_p9(self):
+        self.safe_label1.setPalette(self.p1)
+        self.safe_label2.setPalette(self.p2)
+        self.safe_label3.setPalette(self.p3)
+        self.warning_label1.setPalette(self.p4)
+        self.warning_label2.setPalette(self.p5)
+        self.warning_label3.setPalette(self.p6)
+        self.danger_label1.setPalette(self.p7)
+        self.danger_label2.setPalette(self.p8)
+        self.danger_label3.setPalette(self.p9)
 
     @staticmethod
     def quit():
