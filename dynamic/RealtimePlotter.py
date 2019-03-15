@@ -134,7 +134,7 @@ class RealtimePlotter(object):
                 else:
                     self.ui.set_p8()
                 if t_flag != self.d_flag:
-                    self.ui.msg_text.append(self.get_time() + "<font color = 'red'>--> Warning! Someone coming!!")
+                    self.ui.msg_text.append(self.get_time() + "<font color = 'yellow'>--> Warning! Someone coming!!")
                     self.ui.auto_scroll()
                 segments.append(s[-1])
             else:
@@ -145,7 +145,7 @@ class RealtimePlotter(object):
                     res = clf.predict(f)
                     if res < 0:
                         self.ui.msg_text.append(
-                            self.get_time() + "<font color = 'black'>--> Security! Legal person passed!!")
+                            self.get_time() + "<font color = 'green'>--> Security! Legal person passed!!")
                         self.ui.set_p1()
                     else:
                         self.ui.msg_text.append(
