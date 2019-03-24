@@ -4,8 +4,8 @@ import os
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QTextCursor, QPalette, QColor
-from PyQt5.QtWidgets import QSizePolicy
+from PyQt5.QtGui import QTextCursor, QPalette, QColor, QPixmap
+from PyQt5.QtWidgets import QSizePolicy, QLabel
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from dynamic.RealtimePlotter import RealtimePlotter, segments
 
@@ -26,7 +26,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1, self.danger_label2, self.danger_label3 = None, None, None
         self.data_select_button, self.file_name = None, None
         self.start_button, self.pause_button, self.quit_button = None, None, None
-        self.main_splitter, self.sub_splitter = None, None
+
 
         self.msg_text = None
         self.shown_speed = 1
@@ -53,6 +53,9 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.vertical_top_layout.addLayout(self.vertical_main_layout)
         self.vertical_main_layout.setContentsMargins(10, 10, 10, 10)
 
+        self.vertical_second_layout = QtWidgets.QVBoxLayout()
+        self.vertical_second_layout.setContentsMargins(0, 10, 0, 10)
+
         self.horizontal_second_layout = QtWidgets.QHBoxLayout()
         self.horizontal_second_layout.setContentsMargins(0, 10, 0, 10)
 
@@ -61,8 +64,20 @@ class UiMainWindow(QtWidgets.QMainWindow):
 
         # add widget into layouts
         self.plotter = RealtimePlotter(self)
-        self.widget_canvas = FigureCanvas(self.plotter.fig)
-        self.vertical_main_layout.addWidget(self.widget_canvas)
+
+        pic_map = QPixmap('t1.png')
+        self.label_map = QLabel()
+        self.label_map.setScaledContents(True)
+        self.label_map.setPixmap(pic_map.scaled(self.label_map.size(), Qt.KeepAspectRatioByExpanding))
+        pic_man = QPixmap('t2.png')
+        self.label_man = QLabel()
+        self.label_man.setPixmap(pic_man)
+        pic_intruder = QPixmap('p3.png')
+        label_intruder = QLabel()
+        label_intruder.setPixmap(pic_intruder)
+
+        self.vertical_second_layout.addWidget(self.label_map)
+        self.vertical_main_layout.addLayout(self.vertical_second_layout)
         self.vertical_main_layout.addLayout(self.horizontal_second_layout)
 
         self.start_button = QtWidgets.QPushButton()

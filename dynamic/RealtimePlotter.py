@@ -6,6 +6,8 @@ import subprocess
 import threading
 from random import randint
 from time import sleep
+
+from PyQt5.QtGui import QPixmap
 from numpy import std
 import matplotlib.animation as animation
 import numpy as np
@@ -24,12 +26,6 @@ class RealtimePlotter(object):
     def __init__(self, ui):
         self.d_flag = 0
         self.ui = ui
-        self.size = 200
-        self.styles = 'k-'
-        self.xlabels = "Time"
-        self.ylabels = "Amplitude"
-        self.yticks = (0, 25, 50)
-        self.legend = None
         self.interval_msec = 10
         self.tx = 0
         self.rx = 0
@@ -40,36 +36,7 @@ class RealtimePlotter(object):
         self.last_value = None
         self.last_plot_data = None
         self.filename = "/home/luxiang/linux-80211n-csitool-supplementary/csi_data/1.dat"
-        self.fig = Figure(figsize=(10, 20), dpi=100, tight_layout=True)
-        # X values are arbitrary ascending; Y is initially zero
-        self.x = np.arange(0, self.size)
-        y = np.zeros(self.size)
         self.start_flag = False
-        self.axes = self.fig.add_subplot(111)
-
-        # Create lines
-        self.lines = []
-        style = self.styles
-        ax = self.axes
-
-        styles_for_row = style if type(style) == tuple else [style]
-        for k in range(len(styles_for_row)):
-            self.lines.append(ax.plot(self.x, y, styles_for_row[k], animated=True)[0])
-
-        if self.legend is not None and len(self.legend) > 0:
-            ax.legend()
-
-        # Add properties as specified
-        ax.set_xlabel(self.xlabels, fontsize=15)
-        ax.set_ylabel(self.ylabels, fontsize=15)
-
-        # Set axis limits
-        ax.set_xlim(0, self.size - 0.5)
-
-        # Set ticks and gridlines
-        ax.yaxis.set_ticks(self.yticks)
-        ax.yaxis.grid(True)
-        ax.yaxis.set_visible(True)
 
     def start(self):
         log = threading.Thread(target=self.log)
@@ -81,8 +48,6 @@ class RealtimePlotter(object):
             print(2)
         log.start()
         det.start()
-        RealtimePlotter.ani = animation.FuncAnimation(self.fig, self.animate_subcarrier,
-                                                      blit=True, interval=self.interval_msec)
 
     def get_values(self):
         if self.start_flag:
