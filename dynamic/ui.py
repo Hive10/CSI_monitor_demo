@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QTextCursor, QPalette, QColor, QPixmap
 from PyQt5.QtWidgets import QSizePolicy, QLabel
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from dynamic.RealtimePlotter import RealtimePlotter, segments
+
+from dynamic.RealtimePlotter import RealtimePlotter
 
 
 class UiMainWindow(QtWidgets.QMainWindow):
@@ -17,16 +16,17 @@ class UiMainWindow(QtWidgets.QMainWindow):
 
         # define the object variable
         self.vertical_top_layout, self.vertical_main_layout = None, None
-        self.horizontal_second_layout, self.vertical_tips_layout = None, None
+        self.horizontal_second_layout, self.vertical_second_layout, self.vertical_tips_layout = None, None, None
         self.central_widget, self.plotter, self.widget_canvas = None, None, None
-
-        self.p0, self.p1, self.p2, self.p3 = None, None, None, None
+        self.main_splitter, self.sub_splitter = None, None
+        self.p0, self.p1, self.p2, self.p3, self.p4 = None, None, None, None, None
+        self.p5, self.p6, self.p7, self.p8, self.p9 = None, None, None, None, None
+        self.pic, self.label_map = None, None
         self.safe_label1, self.safe_label2, self.safe_label3 = None, None, None
         self.warning_label1, self.warning_label2, self.warning_label3 = None, None, None
         self.danger_label1, self.danger_label2, self.danger_label3 = None, None, None
         self.data_select_button, self.file_name = None, None
         self.start_button, self.pause_button, self.quit_button = None, None, None
-
 
         self.msg_text = None
         self.shown_speed = 1
@@ -65,17 +65,11 @@ class UiMainWindow(QtWidgets.QMainWindow):
         # add widget into layouts
         self.plotter = RealtimePlotter(self)
 
-        pic_map = QPixmap('t1.png')
+        self.pic = QPixmap('./dynamic/img/map.png')
         self.label_map = QLabel()
+        self.label_map.setFixedHeight(700)
         self.label_map.setScaledContents(True)
-        self.label_map.setPixmap(pic_map.scaled(self.label_map.size(), Qt.KeepAspectRatioByExpanding))
-        pic_man = QPixmap('t2.png')
-        self.label_man = QLabel()
-        self.label_man.setPixmap(pic_man)
-        pic_intruder = QPixmap('p3.png')
-        label_intruder = QLabel()
-        label_intruder.setPixmap(pic_intruder)
-
+        self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
         self.vertical_second_layout.addWidget(self.label_map)
         self.vertical_main_layout.addLayout(self.vertical_second_layout)
         self.vertical_main_layout.addLayout(self.horizontal_second_layout)
@@ -207,6 +201,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.quit_button.clicked.connect(self.quit)
 
     def start(self):
+
         if self.plotter.start_flag is True:
             return
         self.plotter.start_flag = True
@@ -240,7 +235,10 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.warning_label3.setPalette(self.p0)
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
-        self.danger_label1.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+        print(0)
+        # self.pic = QPixmap('./dynamic/img/loc1.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p1(self):
         self.safe_label1.setPalette(self.p1)
@@ -251,7 +249,10 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.warning_label3.setPalette(self.p0)
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
-        self.danger_label1.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+        print(1)
+        # self.pic = QPixmap('./dynamic/img/loc2.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p2(self):
         self.safe_label1.setPalette(self.p1)
@@ -262,7 +263,10 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.warning_label3.setPalette(self.p0)
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
-        self.danger_label1.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+        print(2)
+        # self.pic = QPixmap('./dynamic/img/loc3.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p3(self):
         self.safe_label1.setPalette(self.p1)
@@ -273,7 +277,10 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.warning_label3.setPalette(self.p0)
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
-        self.danger_label1.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+        print(3)
+        # self.pic = QPixmap('./dynamic/img/loc5.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p4(self):
         self.safe_label1.setPalette(self.p1)
@@ -284,7 +291,10 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.warning_label3.setPalette(self.p0)
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
-        self.danger_label1.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+        print(4)
+        # self.pic = QPixmap('./dynamic/img/loc7.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p5(self):
         self.safe_label1.setPalette(self.p1)
@@ -295,7 +305,10 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.warning_label3.setPalette(self.p0)
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
-        self.danger_label1.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+        print(5)
+        # self.pic = QPixmap('./dynamic/img/loc9.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p6(self):
         self.safe_label1.setPalette(self.p1)
@@ -306,7 +319,10 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.warning_label3.setPalette(self.p6)
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
-        self.danger_label1.setPalette(self.p0)
+        self.danger_label3.setPalette(self.p0)
+        print(6)
+        # self.pic = QPixmap('./dynamic/img/loc11.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p7(self):
         self.safe_label1.setPalette(self.p1)
@@ -318,6 +334,9 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p7)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
+        print(7)
+        # self.pic = QPixmap('./dynamic/img/loc13.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p8(self):
         self.safe_label1.setPalette(self.p1)
@@ -329,6 +348,9 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p7)
         self.danger_label2.setPalette(self.p8)
         self.danger_label3.setPalette(self.p0)
+        print(8)
+        # self.pic = QPixmap('./dynamic/img/loc15.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     def set_p9(self):
         self.safe_label1.setPalette(self.p1)
@@ -340,12 +362,16 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p7)
         self.danger_label2.setPalette(self.p8)
         self.danger_label3.setPalette(self.p9)
+        print(9)
+        # self.pic = QPixmap('./dynamic/img/intrude.png')
+        # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     @staticmethod
     def quit():
         # print(segments)
         # for item in segments:
         #     print(len(item))
+        print(2324)
         os.system("sudo kill -s 9 `ps -ef|grep '../netlink/log_to_file'|grep -v sudo|grep -v grep|awk '{print $2}'`")
         sys.exit(0)
 
@@ -355,6 +381,7 @@ if __name__ == "__main__":
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    MainWindow.setWindowState(Qt.WindowMaximized)
     ui = UiMainWindow()
     ui.setup_ui(MainWindow)
     MainWindow.show()
