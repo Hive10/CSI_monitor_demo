@@ -4,8 +4,7 @@ import pandas as pd
 
 
 def detect(s):
-    # print(std(s))
-    if s[-1] != 0 and std(s) > 350:
+    if s[-1] != 0 and std(s) > 280:
         return 1
     else:
         return 0

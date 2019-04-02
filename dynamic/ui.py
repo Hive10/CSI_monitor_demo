@@ -207,16 +207,16 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.plotter.start_flag = True
         # self.plotter.filename = self.plotter.filepath + str(randint(0, 100000)) + '.dat'
         self.plotter.start()
-        self.msg_text.append(self.plotter.get_time() + "<font color = 'black'>--> Showing...")
-        self.auto_scroll()
+        # self.msg_text.append(self.plotter.get_time() + "<font color = 'black'>--> Showing...")
+        # self.auto_scroll()
 
     def pause(self):
         if self.plotter.start_flag is False:
             return
         os.system("sudo kill -s 9 `ps -ef|grep '../netlink/log_to_file'|grep -v sudo|grep -v grep|awk '{print $2}'`")
-        self.msg_text.append(
-            "<font color = 'black'>" + self.plotter.get_time() + "<font color = 'red'>--> Stop showing!")
-        self.auto_scroll()
+        # self.msg_text.append(
+        #     "<font color = 'black'>" + self.plotter.get_time() + "<font color = 'red'>--> Stop showing!")
+        # self.auto_scroll()
         self.plotter.pause()
         self.plotter.start_flag = False
 
@@ -236,7 +236,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(0)
+        # print(0)
         # self.pic = QPixmap('./dynamic/img/loc1.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -250,7 +250,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(1)
+        # print(1)
         # self.pic = QPixmap('./dynamic/img/loc2.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -264,7 +264,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(2)
+        # print(2)
         # self.pic = QPixmap('./dynamic/img/loc3.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -278,7 +278,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(3)
+        # print(3)
         # self.pic = QPixmap('./dynamic/img/loc5.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -292,7 +292,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(4)
+        # print(4)
         # self.pic = QPixmap('./dynamic/img/loc7.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -306,7 +306,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(5)
+        # print(5)
         # self.pic = QPixmap('./dynamic/img/loc9.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -320,7 +320,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p0)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(6)
+        # print(6)
         # self.pic = QPixmap('./dynamic/img/loc11.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -334,7 +334,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p7)
         self.danger_label2.setPalette(self.p0)
         self.danger_label3.setPalette(self.p0)
-        print(7)
+        # print(7)
         # self.pic = QPixmap('./dynamic/img/loc13.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -348,7 +348,7 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p7)
         self.danger_label2.setPalette(self.p8)
         self.danger_label3.setPalette(self.p0)
-        print(8)
+        # print(8)
         # self.pic = QPixmap('./dynamic/img/loc15.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
@@ -362,23 +362,18 @@ class UiMainWindow(QtWidgets.QMainWindow):
         self.danger_label1.setPalette(self.p7)
         self.danger_label2.setPalette(self.p8)
         self.danger_label3.setPalette(self.p9)
-        print(9)
+        # print(9)
         # self.pic = QPixmap('./dynamic/img/intrude.png')
         # self.label_map.setPixmap(self.pic.scaled(self.label_map.size(), Qt.IgnoreAspectRatio))
 
     @staticmethod
     def quit():
-        # print(segments)
-        # for item in segments:
-        #     print(len(item))
-        print(2324)
         os.system("sudo kill -s 9 `ps -ef|grep '../netlink/log_to_file'|grep -v sudo|grep -v grep|awk '{print $2}'`")
         sys.exit(0)
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     MainWindow.setWindowState(Qt.WindowMaximized)
